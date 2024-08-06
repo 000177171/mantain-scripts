@@ -1,0 +1,105 @@
+_G.boxcolor = Color3.fromRGB(255, 255, 255)
+_G.box = true
+
+_G.namecolor = Color3.fromRGB(255, 255, 255)
+_G.name = true
+
+_G.distancecolor = Color3.fromRGB(255, 255, 255)
+_G.distance = true
+
+local elements = {}
+local players = game.Players
+local camera = workspace.CurrentCamera
+local runService = game:GetService("RunService")
+
+local function esp_worker()
+    for _, v in pairs(elements) do
+        v:Remove()
+    end
+    table.clear(elements)
+    
+    local local_head_pos
+    
+    for _, player in pairs(players:GetPlayers()) do
+        local character = player.Character
+        if player.Name == game.Players.LocalPlayer.Name then
+           local_head_pos = character:FindFirstChild("HumanoidRootPart").Position 
+        end
+        if character and character:FindFirstChild("HumanoidRootPart") and player ~= game.Players.LocalPlayer then
+            local humanoidRootPart = character.HumanoidRootPart
+            local vec, onscreen = camera:WorldToViewportPoint(humanoidRootPart.Position)
+            if onscreen then
+                local size = (camera:WorldToViewportPoint(humanoidRootPart.Position + Vector3.new(2, 2, 0)) - vec).Magnitude
+                if _G.box then
+                    local boxO = Drawing.new("Square")
+                    boxO.Position = Vector2.new(vec.X - size / 2 - 1, vec.Y - size / 2 - 1)
+                    boxO.Size = Vector2.new(size, size * 1.75)
+                    boxO.Visible = true
+                    boxO.Color = Color3.fromRGB(0,0,0)
+                    boxO.Thickness = 1
+                    
+                    local boxO2 = Drawing.new("Square")
+                    boxO2.Position = Vector2.new(vec.X - size / 2 + 1, vec.Y - size / 2 + 1)
+                    boxO2.Size = Vector2.new(size, size * 1.75)
+                    boxO2.Visible = true
+                    boxO2.Color = Color3.fromRGB(0,0,0)
+                    boxO2.Thickness = 1
+                    
+                    local box = Drawing.new("Square")
+                    box.Position = Vector2.new(vec.X - size / 2, vec.Y - size / 2)
+                    box.Size = Vector2.new(size, size * 1.75)
+                    box.Visible = true
+                    box.Color = _G.boxcolor 
+                    box.Thickness = 1
+                    
+                    table.insert(elements, box)
+                    table.insert(elements, boxO)
+                    table.insert(elements, boxO2)
+                end
+                
+                if _G.name then
+                    local name = Drawing.new("Text")
+                    name.Position = Vector2.new(vec.X, vec.Y - size / 2 - 15)
+                    name.Font = 0
+                    name.Size = 12
+                    name.Text = character.Name
+                    name.Color = _G.namecolor
+                    name.Visible = true
+                    name.Center = true 
+                    name.Outline = true
+                    name.OutlineColor = Color3.fromRGB(0,0,0)
+                    
+                    table.insert(elements, name)
+                end
+                
+                if _G.distance then
+                    local distance = Drawing.new("Text")
+                    distance.Position = Vector2.new(vec.X, vec.Y - size / 2 - 30)
+                    distance.Font = 0
+                    distance.Size = 12
+                    distance.Text = "["..tostring( math.floor((local_head_pos - humanoidRootPart.Position).Magnitude) ).."]"
+                    distance.Color = _G.distancecolor
+                    distance.Visible = true
+                    distance.Center = true
+                    distance.Outline = true
+                    distance.OutlineColor = Color3.fromRGB(0,0,0)
+                    
+                    table.insert(elements, distance)
+                end
+            end
+        end
+    end
+end
+
+runService.RenderStepped:Connect(function()
+    esp_worker()
+end)
+
+workspace.ChildAdded:Connect(function(child)
+    if child:IsA("Model") and child:FindFirstChild("Humanoid") then
+        esp_worker()
+    end
+end)
+
+players.PlayerAdded:Connect(esp_worker)
+players.PlayerRemoving:Connect(esp_worker)
