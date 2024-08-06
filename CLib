@@ -1,0 +1,226 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "CLib | Script For Celery",
+    SubTitle = "by 00017717",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+local Tabs = {
+    MantainTab = Window:AddTab({ Title = "Mantained Scripts", Icon = "" }),
+    BB = Window:AddTab({ Title = "Blade Ball", Icon = "" }),
+    MM2 = Window:AddTab({ Title = "Murder Mystery 2", Icon = "" }),
+    Arsenal = Window:AddTab({ Title = "Arsenal", Icon = "" }),
+    Rivals = Window:AddTab({ Title = "Rivals", Icon = "" }),
+    KAT = Window:AddTab({ Title = "KAT", Icon = "" }),
+    DH = Window:AddTab({ Title = "Da Hood", Icon = "" }),
+    Doors = Window:AddTab({ Title = "Doors", Icon = "" }),
+    Pressure = Window:AddTab({ Title = "Pressure", Icon = "" }),
+    Universal = Window:AddTab({ Title = "Universal", Icon = "" }),
+    Debugs = Window:AddTab({ Title = "Debugs", Icon = "" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+do
+    Tabs.MantainTab:AddParagraph({
+        Title = "Notice",
+        Content = "Scripts that sometimes not working:\n--Murder Mystery 2"
+    })
+
+    Tabs.MantainTab:AddButton({
+        Title = "Blade Ball",
+        Description = "Triple Hub",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/000177171/mantain-scripts/main/BB/TripleHub"))()
+        end
+    })
+
+    Tabs.MantainTab:AddButton({
+        Title = "Murder Mystery 2",
+        Description = "Nexus Hub",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/000177171/mantain-scripts/main/MM2/NexusHub"))()
+        end
+    })
+
+    Tabs.MantainTab:AddButton({
+        Title = "Pressure",
+        Description = "",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/000177171/mantain-scripts/main/Pressure/Basic"))()
+        end
+    })
+
+    Tabs.MantainTab:AddButton({
+        Title = "Aftermath ESP",
+        Description = "ESP Only",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/000177171/mantain-scripts/main/Aftermath/BasicESP"))()
+        end
+    })
+
+    Tabs.BB:AddButton({
+        Title = "GUI 1",
+        Description = "",
+        Callback = function()
+            loadstring(game:HttpGet("https://scriptblox.com/raw/UPD-Blade-Ball-op-autoparry-with-visualizer-8652"))()
+        end
+    })
+
+    Tabs.Rivals:AddButton({
+        Title = "GUI 1",
+        Description = "",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Sheeshablee73/Scriptss/main/Rivals%20Latest.lua"))()
+        end
+    })
+
+    Tabs.Rivals:AddButton({
+        Title = "GUI 2",
+        Description = "Previous version of GUI 1",
+        Callback = function()
+            local scriptURL = 'https://raw.githubusercontent.com/Sheeshablee73/Scriptss/main/RivalsUPD2.lua'
+            local response = game:HttpGet(scriptURL)
+            local executeScript = loadstring(response)
+            executeScript()
+        end
+    })
+
+    Tabs.Arsenal:AddButton({
+        Title = "GUI 1",
+        Description = "Aimbot - Gun Modification - Infjump by Void",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/PLavdhda"))()
+        end
+    })
+
+    Tabs.Arsenal:AddButton({
+        Title = "Quotas Hub",
+        Description = "Recommended",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Insertl/QuotasHub/main/BETAv1.3"))()
+        end
+    })
+
+    Tabs.DH:AddButton({
+        Title = "Howl's Leak",
+        Description = "C to lock - X to macro - V to spin",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/hojixv/Howl_Leak/main/Howl"))()
+        end
+    })
+
+    Tabs.Doors:AddButton({
+        Title = "Clutch GUI",
+        Description = "",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Scriptta/doors/main/clutch.lua"))()
+        end
+    })
+
+    Tabs.KAT:AddButton({
+        Title = "GUI 1",
+        Description = "",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/discopro/open-source/main/dreamybull.lua'))()
+        end
+    })
+
+    --Universal
+    Tabs.Universal:AddButton({
+        Title = "Infinite Yield",
+        Description = "an Admin Panel",
+        Callback = function()
+            cloneref = function(e) return e end
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        end
+    })
+
+    Tabs.Universal:AddButton({
+        Title = "Chat Bypasser",
+        Description = "Risky on public server",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua"))()
+        end
+    })
+    --Debugs
+    Tabs.Debugs:AddButton({
+        Title = "Dex V2",
+        Description = "an old version of Dex Explorer",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/dex2.0", true))()
+        end
+    })
+
+    Tabs.Debugs:AddButton({
+        Title = "Dex V3",
+        Description = "Regular Dex Explorer",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+        end
+    })
+
+    Tabs.Debugs:AddButton({
+        Title = "Dex V3 + Decomplier",
+        Description = "Regular Dex V3 with extra Decomplier",
+        Callback = function()
+            local decompsrc = game:HttpGet("https://raw.githubusercontent.com/w-a-e/Advanced-Decompiler-V3/main/init.lua", true)
+            local function loaddecomp(decomptimeout)
+                local CONSTANTS = [[
+local ENABLED_REMARKS = {
+    NATIVE_REMARK = false,
+    INLINE_REMARK = false
+}
+local DECOMPILER_TIMEOUT = ]] .. decomptimeout .. [[
+    
+local READER_FLOAT_PRECISION = 99
+local SHOW_INSTRUCTION_LINES = false
+local SHOW_REFERENCES = false
+local SHOW_OPERATION_NAMES = false
+local SHOW_MISC_OPERATIONS = false
+local LIST_USED_GLOBALS = false
+local RETURN_ELAPSED_TIME = false
+]]
+
+                loadstring(string.gsub(decompsrc, ";;CONSTANTS HERE;;", CONSTANTS), "Advanced-Decompiler-V3")()
+            end
+            loaddecomp(1)
+
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/t1ware/DexV5/main/dex-v2.lua'))()
+        end
+    })
+
+end
+
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+
+SaveManager:IgnoreThemeSettings()
+
+InterfaceManager:SetFolder("CLib")
+SaveManager:SetFolder("CLib/cfigs")
+
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
+
+
+Window:SelectTab(1)
+
+Fluent:Notify({
+    Title = "CLib",
+    Content = "The script has been loaded.",
+    Duration = 8
+})
+
+-- You can use the SaveManager:LoadAutoloadConfig() to load a config
+-- which has been marked to be one that auto loads!
+SaveManager:LoadAutoloadConfig()
