@@ -1,3 +1,9 @@
+local p = Instance.new("Part")
+p.Position = Vector3.new(-34, 1494, -1120)
+p.Size = Vector3.new(100, 10, 100)
+p.Transparency = 0
+p.Anchored = true  
+p.Parent = workspace
 local sp = 16
 local key = {}
 local monster = {}
