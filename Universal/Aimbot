@@ -1,15 +1,3 @@
--- Settings
-ESPpoint = "Head"
-PixelFOV = 130
-ScreenWidth = 2560
-ScreenHeight = 1440
-
-Target = "first"
-Rage = false -- sets pixel to max, then turns off onScreen detection. also uses some raycasting to avoid walls!
--- ========
-
-
-
 -- Services
 local UIS = game:GetService("UserInputService");
 local RunService = game:GetService("RunService");
