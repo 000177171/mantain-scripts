@@ -14,6 +14,7 @@ local Window = Fluent:CreateWindow({
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
+	Info = Window:AddTab({ Title = "Information", Icon = "" }),
     MantainTab = Window:AddTab({ Title = "Mantained Scripts", Icon = "" }),
     BB = Window:AddTab({ Title = "Blade Ball", Icon = "" }),
     MM2 = Window:AddTab({ Title = "Murder Mystery 2", Icon = "" }),
@@ -34,6 +35,14 @@ do
     Tabs.MantainTab:AddParagraph({
         Title = "Notice",
         Content = "Scripts that sometimes not working:\n--Murder Mystery 2"
+    })
+	
+	Tabs.Info:AddButton({
+        Title = "Celery Discord Server",
+        Description = "Click me to copy!",
+        Callback = function()
+            setclipboard('discord.gg/celery')
+        end
     })
 
     Tabs.MantainTab:AddButton({
